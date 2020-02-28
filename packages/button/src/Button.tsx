@@ -288,15 +288,8 @@ interface SharedButtonProps {
   glyph?: React.ReactElement;
 }
 
-interface LinkButtonProps extends HTMLElementProps<'a'>, SharedButtonProps {
-  href: string;
-}
-
-interface ButtonButtonProps
-  extends HTMLElementProps<'button'>,
-    SharedButtonProps {
-  href?: null;
-}
+type LinkButtonProps = HTMLElementProps<'a'> & SharedButtonProps;
+type ButtonButtonProps = HTMLElementProps<'button'> & SharedButtonProps;
 
 type CustomElementButtonProps = SharedButtonProps & {
   as: React.ElementType<any>;
@@ -317,7 +310,7 @@ function usesCustomElement(
 function usesLinkElement(
   props: LinkButtonProps | ButtonButtonProps,
 ): props is LinkButtonProps {
-  return props.href != null;
+  return (props as LinkButtonProps).href !== undefined;
 }
 
 const Button = React.forwardRef((props: ButtonProps, forwardRef) => {

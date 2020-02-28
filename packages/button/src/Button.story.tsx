@@ -22,19 +22,11 @@ storiesOf('Buttons', module)
       )}
       title={text('Title', 'The button title')}
       disabled={boolean('Disabled', false)}
-      href={
-        /*
-        NOTE(JeT):
-        TS doesn't like string | null here, it wants you to consistently choose one or the other,
-        and tries to derive the other props based on that distinction.
-        In practice, I don't expect people to be switching this prop dynamically very often.
-        */
-        select(
-          'Href',
-          { 'mongodb.design': 'http://mongodb.design', none: null },
-          null,
-        ) as any
-      }
+      href={select(
+        'Href',
+        { 'mongodb.design': 'http://mongodb.design', none: undefined },
+        undefined,
+      )}
       glyph={<Icon glyph={select('Glyph', Object.keys(glyphs), 'Edit')} />}
       className={buttonClass}
     >
